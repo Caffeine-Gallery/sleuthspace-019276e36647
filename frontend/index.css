@@ -19,6 +19,15 @@ h1, h2, h3 {
     color: #35424a;
 }
 
+.strap {
+    font-style: italic;
+    font-size: 1.2em;
+    margin-top: 0.5em;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    font-family: 'Courier New', Courier, monospace;
+}
+
 section {
     background-color: #ffffff;
     margin-bottom: 20px;
