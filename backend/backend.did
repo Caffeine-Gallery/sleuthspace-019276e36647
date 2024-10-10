@@ -1,0 +1,25 @@
+type PersonId = nat;
+type Person = 
+ record {
+   address: text;
+   contactDetails: text;
+   firstName: text;
+   id: PersonId;
+   lastName: text;
+ };
+type NoteId = nat;
+type Note = 
+ record {
+   content: text;
+   creationDate: int;
+   id: NoteId;
+   personId: PersonId;
+   title: text;
+ };
+service : {
+  addNote: (PersonId, text, text) -> (opt NoteId);
+  addPerson: (text, text, text, text) -> (PersonId);
+  getAllPeople: () -> (vec Person) query;
+  getNotesForPerson: (PersonId) -> (vec Note) query;
+  getPerson: (PersonId) -> (opt Person) query;
+}

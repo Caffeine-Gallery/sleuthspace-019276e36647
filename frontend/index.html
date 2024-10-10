@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detective Agency Database</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Detective Agency Database</h1>
+    </header>
+    <main>
+        <section id="add-person">
+            <h2>Add New Person</h2>
+            <form id="person-form">
+                <input type="text" id="firstName" placeholder="First Name" required>
+                <input type="text" id="lastName" placeholder="Last Name" required>
+                <input type="text" id="address" placeholder="Address" required>
+                <input type="text" id="contactDetails" placeholder="Contact Details" required>
+                <button type="submit">Add Person</button>
+            </form>
+        </section>
+        <section id="people-list">
+            <h2>People Database</h2>
+            <ul id="people"></ul>
+        </section>
+        <section id="person-details" style="display: none;">
+            <h2>Person Details</h2>
+            <div id="selected-person"></div>
+            <h3>Add Note</h3>
+            <form id="note-form">
+                <input type="text" id="noteTitle" placeholder="Note Title" required>
+                <textarea id="noteContent" placeholder="Note Content" required></textarea>
+                <button type="submit">Add Note</button>
+            </form>
+            <h3>Notes</h3>
+            <ul id="notes"></ul>
+        </section>
+    </main>
+    <script type="module" src="index.js"></script>
+</body>
+</html>
