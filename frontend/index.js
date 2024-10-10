@@ -48,6 +48,7 @@ async function loadPersonDetails(personId) {
                 <p><strong>Contact:</strong> ${person.contactDetails}</p>
             `;
             await loadNotes(personId);
+            await loadComments(personId);
         }
     } catch (error) {
         console.error('Error loading person details:', error);
@@ -89,8 +90,42 @@ async function addNote(event) {
     }
 }
 
+async function loadComments(personId) {
+    try {
+        const comments = await backend.getCommentsForPerson(personId);
+        const commentsList = document.getElementById('comments');
+        commentsList.innerHTML = '';
+        comments.forEach(comment => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <p>${comment.content}</p>
+                <small>${new Date(Number(comment.creationDate) / 1000000).toLocaleString()}</small>
+            `;
+            commentsList.appendChild(li);
+        });
+    } catch (error) {
+        console.error('Error loading comments:', error);
+    }
+}
+
+async function addComment(event) {
+    event.preventDefault();
+    if (!selectedPersonId) return;
+
+    const content = document.getElementById('commentContent').value;
+
+    try {
+        await backend.addComment(selectedPersonId, content);
+        document.getElementById('comment-form').reset();
+        await loadComments(selectedPersonId);
+    } catch (error) {
+        console.error('Error adding comment:', error);
+    }
+}
+
 window.onload = () => {
     loadPeople();
     document.getElementById('person-form').onsubmit = addPerson;
     document.getElementById('note-form').onsubmit = addNote;
+    document.getElementById('comment-form').onsubmit = addComment;
 };

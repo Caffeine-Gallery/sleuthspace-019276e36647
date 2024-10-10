@@ -16,10 +16,20 @@ type Note =
    personId: PersonId;
    title: text;
  };
+type CommentId = nat;
+type Comment = 
+ record {
+   content: text;
+   creationDate: int;
+   id: CommentId;
+   personId: PersonId;
+ };
 service : {
+  addComment: (PersonId, text) -> (opt CommentId);
   addNote: (PersonId, text, text) -> (opt NoteId);
   addPerson: (text, text, text, text) -> (PersonId);
   getAllPeople: () -> (vec Person) query;
+  getCommentsForPerson: (PersonId) -> (vec Comment) query;
   getNotesForPerson: (PersonId) -> (vec Note) query;
   getPerson: (PersonId) -> (opt Person) query;
 }
