@@ -43,12 +43,14 @@ async function loadPersonDetails(personId) {
             detailsSection.style.display = 'block';
             const selectedPerson = document.getElementById('selected-person');
             selectedPerson.innerHTML = `
-                <p><strong>Name:</strong> ${person.firstName} ${person.lastName}</p>
-                <p><strong>Address:</strong> ${person.address}</p>
-                <p><strong>Contact:</strong> ${person.contactDetails}</p>
+                <p><strong>Name:</strong> ${person.firstName || ''} ${person.lastName || ''}</p>
+                <p><strong>Address:</strong> ${person.address || 'N/A'}</p>
+                <p><strong>Contact:</strong> ${person.contactDetails || 'N/A'}</p>
             `;
             await loadNotes(personId);
             await loadComments(personId);
+        } else {
+            console.error('Person not found');
         }
     } catch (error) {
         console.error('Error loading person details:', error);
@@ -63,8 +65,8 @@ async function loadNotes(personId) {
         notes.forEach(note => {
             const li = document.createElement('li');
             li.innerHTML = `
-                <h4>${note.title}</h4>
-                <p>${note.content}</p>
+                <h4>${note.title || 'Untitled'}</h4>
+                <p>${note.content || ''}</p>
                 <small>${new Date(Number(note.creationDate) / 1000000).toLocaleString()}</small>
             `;
             notesList.appendChild(li);
@@ -98,7 +100,7 @@ async function loadComments(personId) {
         comments.forEach(comment => {
             const li = document.createElement('li');
             li.innerHTML = `
-                <p>${comment.content}</p>
+                <p>${comment.content || ''}</p>
                 <small>${new Date(Number(comment.creationDate) / 1000000).toLocaleString()}</small>
             `;
             commentsList.appendChild(li);
